@@ -1,6 +1,6 @@
 package com.adrianosilva.lisaflowerstore.repository
 
-import com.adrianosilva.lisaflowerstore.database.FlowerDao
+import com.adrianosilva.lisaflowerstore.database.dao.FlowerDao
 
 class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 

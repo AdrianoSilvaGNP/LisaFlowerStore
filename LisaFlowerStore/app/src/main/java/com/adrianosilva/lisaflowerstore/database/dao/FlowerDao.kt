@@ -1,4 +1,4 @@
-package com.adrianosilva.lisaflowerstore.database
+package com.adrianosilva.lisaflowerstore.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -13,12 +13,12 @@ interface FlowerDao {
     @Query("SELECT * FROM flowers WHERE name = :name")
     fun findFlowerByName(name: String): LiveData<FlowerObject>
 
-    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(flowers: LiveData<List<FlowerObject>>)*/
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(flowers: List<FlowerObject>)
 
-    /*@Update
-    fun updateFlower(flower: LiveData<FlowerObject>)
+    @Update
+    fun updateFlower(flower: FlowerObject)
 
     @Delete
-    fun deleteFlower(flower : FlowerObject)*/
+    fun deleteFlower(flower : FlowerObject)
 }

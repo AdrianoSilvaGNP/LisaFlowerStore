@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.adrianosilva.lisaflowerstore.database.dao.FlowerDao
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 
 /**
@@ -19,16 +20,18 @@ abstract class FlowerDatabase : RoomDatabase() {
     abstract fun flowersDao(): FlowerDao
 
     companion object {
-        private var instance: FlowerDatabase? = null
+        private var INSTANCE: FlowerDatabase? = null
+        private val lock = Any()
         @Synchronized
-        fun get(context: Context): FlowerDatabase {
-            if (instance == null) {
-                instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    FlowerDatabase::class.java, "LisaFlowerStore"
-                ).build()
+        fun getInstance(context: Context): FlowerDatabase {
+            synchronized(lock) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                        FlowerDatabase::class.java, "LisaFlowerStore.db")
+                        .build()
+                }
+                return INSTANCE!!
             }
-            return instance!!
         }
     }
 }
