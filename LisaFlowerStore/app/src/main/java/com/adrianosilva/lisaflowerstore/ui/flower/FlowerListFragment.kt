@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.adrianosilva.lisaflowerstore.adapters.FlowerAdapter
 
 import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerListBinding
-import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
-import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModelFactory
+import com.adrianosilva.lisaflowerstore.viewmodel.ViewModelFactory
 
 
 class FlowerListFragment : Fragment() {
@@ -23,7 +23,7 @@ class FlowerListFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentFlowerListBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProviders.of(this, FlowerListViewModelFactory.getInstance(activity!!.application)).get(FlowerListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance(activity!!.application)).get(FlowerListViewModel::class.java)
 
         val adapter = FlowerAdapter()
         binding.flowerListFragmentRv.adapter = adapter
@@ -31,6 +31,10 @@ class FlowerListFragment : Fragment() {
 
         //viewModel.insertFlower(FlowerObject(null, "Florzinha", "TESTESTESTEST", 24.99))
         //viewModel.insertFlower(FlowerObject(null, "Florzona", "TESTESTESTEST", 32.99))
+
+        binding.flowerListAddFab.setOnClickListener {
+            view!!.findNavController().navigate(FlowerListFragmentDirections.actionFlowerListFragmentToFlowerAddFragment())
+        }
 
         return binding.root
     }

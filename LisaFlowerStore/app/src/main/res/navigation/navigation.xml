@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
     app:startDestination="@id/flowerListFragment">
 
     <fragment
         android:id="@+id/flowerListFragment"
         android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerListFragment"
-        android:label="FlowerListFragment" />
+        android:label="FlowerListFragment"
+        tools:layout="@layout/fragment_flower_list">
+        <action
+            android:id="@+id/action_flowerListFragment_to_flowerAddFragment"
+            app:destination="@id/flowerAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/flowerAddFragment"
+        android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerAddFragment"
+        android:label="FlowerAddFragment"
+        tools:layout="@layout/fragment_flower_add">
+        <action
+            android:id="@+id/action_flowerAddFragment_to_flowerListFragment"
+            app:destination="@id/flowerListFragment"
+            app:popUpTo="@+id/flowerListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

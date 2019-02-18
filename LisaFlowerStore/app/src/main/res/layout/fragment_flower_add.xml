@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.flower.FlowerAddFragment">
+
+        <ImageView
+            android:id="@+id/flower_add_fragment_flower_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/lfs_logo" />
+
+        <EditText
+            android:id="@+id/flower_add_fragment_name_et"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Flower name"
+            app:layout_constraintEnd_toEndOf="@+id/flower_add_fragment_flower_iv"
+            app:layout_constraintStart_toStartOf="@+id/flower_add_fragment_flower_iv"
+            app:layout_constraintTop_toBottomOf="@+id/flower_add_fragment_flower_iv" />
+
+        <EditText
+            android:id="@+id/flower_add_fragment_description_et"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Flower description"
+            app:layout_constraintEnd_toEndOf="@+id/flower_add_fragment_name_et"
+            app:layout_constraintStart_toStartOf="@+id/flower_add_fragment_name_et"
+            app:layout_constraintTop_toBottomOf="@+id/flower_add_fragment_name_et" />
+
+        <EditText
+            android:id="@+id/flower_add_fragment_price_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:inputType="numberDecimal"
+            app:layout_constraintStart_toStartOf="@+id/flower_add_fragment_description_et"
+            app:layout_constraintTop_toBottomOf="@+id/flower_add_fragment_description_et" />
+
+        <Button
+            android:id="@+id/flower_add_fragment_confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Confirm"
+            android:onClick="@{clickListener}"
+            app:layout_constraintEnd_toEndOf="@+id/flower_add_fragment_description_et"
+            app:layout_constraintStart_toStartOf="@+id/flower_add_fragment_description_et"
+            app:layout_constraintTop_toBottomOf="@+id/flower_add_fragment_price_et" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

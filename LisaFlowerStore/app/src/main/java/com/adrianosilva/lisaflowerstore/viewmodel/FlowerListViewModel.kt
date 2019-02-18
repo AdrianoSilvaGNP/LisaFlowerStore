@@ -18,6 +18,4 @@ class FlowerListViewModel internal constructor(flowerRepository: FlowerRepositor
 
     fun getAllFlowers() = mAllFlowers
 
-    fun insertFlower(flower: FlowerObject) = repository.insertFlower(flower)
-
 }
