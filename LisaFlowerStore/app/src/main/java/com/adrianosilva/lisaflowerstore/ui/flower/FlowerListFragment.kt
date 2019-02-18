@@ -29,8 +29,8 @@ class FlowerListFragment : Fragment() {
         binding.flowerListFragmentRv.adapter = adapter
         subscribeUi(adapter)
 
-        viewModel.insertFlower(FlowerObject(null, "Florzinha", "TESTESTESTEST", 24.99))
-        viewModel.insertFlower(FlowerObject(null, "Florzona", "TESTESTESTEST", 32.99))
+        //viewModel.insertFlower(FlowerObject(null, "Florzinha", "TESTESTESTEST", 24.99))
+        //viewModel.insertFlower(FlowerObject(null, "Florzona", "TESTESTESTEST", 32.99))
 
         return binding.root
     }
