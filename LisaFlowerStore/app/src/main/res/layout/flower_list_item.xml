@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:srcCompat="@mipmap/lfs_logo" />
 
         <TextView
             android:id="@+id/flower_list_item_label"
@@ -38,7 +38,7 @@
             android:layout_marginTop="8dp"
             android:maxLines="4"
             android:singleLine="false"
-            android:text="Flower"
+            android:text="@{flowerObject.name}"
             android:textSize="16sp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -62,7 +62,7 @@
             android:id="@+id/flower_list_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2400.99€"
+            android:text="@{flowerObject.price.toString()}"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@ import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 @Dao
 interface FlowerDao {
 
-    @Query("SELECT * FROM flowers")
+    @Query("SELECT * FROM flowers ORDER BY id ASC")
     fun getAllFlowers(): LiveData<List<FlowerObject>>
 
     @Query("SELECT * FROM flowers WHERE name = :name")
@@ -15,6 +15,9 @@ interface FlowerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(flowers: List<FlowerObject>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFlower(flower: FlowerObject)
 
     @Update
     fun updateFlower(flower: FlowerObject)

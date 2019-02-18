@@ -6,19 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerListBinding
+import com.adrianosilva.lisaflowerstore.databinding.FlowerListItemBinding
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
+import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
 
 class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(FlowerDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
-        return FlowerViewHolder(FragmentFlowerListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val binding = FlowerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FlowerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
         val flower = getItem(position)
         holder.apply {
-            bind(createOnClickListener(flower.id), flower)
+            bind(createOnClickListener(flower.id!!), flower)
             //itemView.tag = flower
         }
     }
@@ -31,12 +33,12 @@ class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(
     }
 
 
-    class FlowerViewHolder(private val binding: FragmentFlowerListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FlowerViewHolder(private val binding: FlowerListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: FlowerObject) {
             binding.apply {
-                //clickListener = listener
-                //flowerObject = item
+                clickListener = listener
+                flowerObject = item
                 executePendingBindings()
             }
         }
