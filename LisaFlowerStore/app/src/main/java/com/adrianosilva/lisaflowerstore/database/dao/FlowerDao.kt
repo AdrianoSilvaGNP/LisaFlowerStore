@@ -11,7 +11,10 @@ interface FlowerDao {
     fun getAllFlowers(): LiveData<List<FlowerObject>>
 
     @Query("SELECT * FROM flowers WHERE name = :name")
-    fun findFlowerByName(name: String): LiveData<FlowerObject>
+    fun getFlowerByName(name: String): LiveData<FlowerObject>
+
+    @Query("SELECT * FROM flowers WHERE id = :id")
+    fun getFlowerById(id: Int): LiveData<FlowerObject>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(flowers: List<FlowerObject>)

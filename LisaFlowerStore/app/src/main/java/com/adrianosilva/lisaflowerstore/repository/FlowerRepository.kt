@@ -2,15 +2,15 @@ package com.adrianosilva.lisaflowerstore.repository
 
 import com.adrianosilva.lisaflowerstore.database.dao.FlowerDao
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlin.concurrent.thread
 
 class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
     fun getFlowers() = flowerDao.getAllFlowers()
 
-    fun getFlowerByName(flowerName: String) = flowerDao.findFlowerByName(flowerName)
+    fun getFlowerById(flowerId: Int) = flowerDao.getFlowerById(flowerId)
+
+    fun getFlowerByName(flowerName: String) = flowerDao.getFlowerByName(flowerName)
 
     fun insertFlower(flower: FlowerObject) = thread { flowerDao.insertFlower(flower) }
 

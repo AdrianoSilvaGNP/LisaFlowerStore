@@ -3,11 +3,13 @@ package com.adrianosilva.lisaflowerstore.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.adrianosilva.lisaflowerstore.databinding.FlowerListItemBinding
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
+import com.adrianosilva.lisaflowerstore.ui.flower.FlowerListFragmentDirections
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
 
 class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(FlowerDiffCallback()) {
@@ -27,8 +29,8 @@ class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(
 
     private fun createOnClickListener(flowerId: Int): View.OnClickListener {
         return View.OnClickListener {
-            /*val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(flowerId)
-            it.findNavController().navigate(direction)*/
+            val direction = FlowerListFragmentDirections.actionFlowerListFragmentToFlowerDetailFragment(flowerId)
+            it.findNavController().navigate(direction)
         }
     }
 

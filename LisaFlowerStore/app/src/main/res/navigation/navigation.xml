@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_flowerListFragment_to_flowerAddFragment"
             app:destination="@id/flowerAddFragment" />
+        <action
+            android:id="@+id/action_flowerListFragment_to_flowerDetailFragment"
+            app:destination="@id/flowerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/flowerAddFragment"
@@ -24,6 +27,15 @@
             app:destination="@id/flowerListFragment"
             app:popUpTo="@+id/flowerListFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/flowerDetailFragment"
+        android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerDetailFragment"
+        android:label="fragment_flower_detail"
+        tools:layout="@layout/fragment_flower_detail" >
+        <argument
+            android:name="flowerId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "575987045998",
+    "firebase_url": "https://lisa-flower-store.firebaseio.com",
+    "project_id": "lisa-flower-store",
+    "storage_bucket": "lisa-flower-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575987045998:android:b4dc4af4b3404574",
+        "android_client_info": {
+          "package_name": "com.adrianosilva.lisaflowerstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575987045998-iom2q1235t0ale44t5a81maph88t8jlh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adrianosilva.lisaflowerstore",
+            "certificate_hash": "b0215f4e294d36b8b4b5dacd0a42ce4d7fdc1274"
+          }
+        },
+        {
+          "client_id": "575987045998-h5qietr88amtcmagqvs494jq1gfioliv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb56hs48cKmmxumVC3PyayB1myVgs9F3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575987045998-h5qietr88amtcmagqvs494jq1gfioliv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

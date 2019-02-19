@@ -12,7 +12,7 @@ import com.adrianosilva.lisaflowerstore.adapters.FlowerAdapter
 
 import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerListBinding
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
-import com.adrianosilva.lisaflowerstore.viewmodel.ViewModelFactory
+import com.adrianosilva.lisaflowerstore.viewmodel.factory.ViewModelFactory
 
 
 class FlowerListFragment : Fragment() {
