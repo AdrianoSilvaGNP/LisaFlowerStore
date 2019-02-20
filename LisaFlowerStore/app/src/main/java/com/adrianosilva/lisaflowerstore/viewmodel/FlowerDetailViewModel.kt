@@ -14,4 +14,6 @@ class FlowerDetailViewModel internal constructor(flowerRepository: FlowerReposit
         flower = repository.getFlowerById(flowerId)
     }
 
+    fun deleteFlower() = repository.deleteFlowerById(flowerId)
+
 }

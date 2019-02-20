@@ -36,6 +36,11 @@
         <argument
             android:name="flowerId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_flowerDetailFragment_to_flowerListFragment"
+            app:destination="@id/flowerListFragment"
+            app:popUpTo="@+id/flowerListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

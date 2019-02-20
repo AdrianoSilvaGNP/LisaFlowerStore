@@ -14,6 +14,8 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
     fun insertFlower(flower: FlowerObject) = thread { flowerDao.insertFlower(flower) }
 
+    fun deleteFlowerById(flowerId: Int) = thread { flowerDao.deleteFlowerById(flowerId) }
+
     init {
         /*val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("message")

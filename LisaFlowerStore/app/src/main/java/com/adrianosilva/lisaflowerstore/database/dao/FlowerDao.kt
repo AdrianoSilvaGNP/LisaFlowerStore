@@ -25,6 +25,6 @@ interface FlowerDao {
     @Update
     fun updateFlower(flower: FlowerObject)
 
-    @Delete
-    fun deleteFlower(flower : FlowerObject)
+    @Query("DELETE FROM flowers WHERE id = :id")
+    fun deleteFlowerById(id: Int)
 }

@@ -7,60 +7,82 @@
         <variable
             name="viewModel"
             type="com.adrianosilva.lisaflowerstore.viewmodel.FlowerDetailViewModel"/>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.flower.FlowerDetailFragment">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/flower_detail_image"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@mipmap/lfs_logo" />
-
-        <TextView
-            android:id="@+id/flower_detail_label"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.flower.name}"
-            android:textSize="26sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/flower_detail_image"
-            app:layout_constraintStart_toStartOf="@+id/flower_detail_image"
-            app:layout_constraintTop_toBottomOf="@+id/flower_detail_image"
-            tools:text="Flower" />
+            tools:context=".ui.flower.FlowerDetailFragment">
 
-        <TextView
-            android:id="@+id/flower_detail_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.flower.description}"
-            android:textSize="26sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/flower_detail_label"
-            app:layout_constraintStart_toStartOf="@+id/flower_detail_label"
-            app:layout_constraintTop_toBottomOf="@+id/flower_detail_label"
-            tools:text="FlowerDescription Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla" />
+            <ImageView
+                android:id="@+id/flower_detail_image"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@mipmap/lfs_logo" />
 
-        <TextView
-            android:id="@+id/flower_detail_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.flower.price.toString() + '€'}"
-            android:textSize="26sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="26dp"
-            app:layout_constraintEnd_toEndOf="@+id/flower_detail_description"
-            app:layout_constraintTop_toBottomOf="@+id/flower_detail_description"
-            tools:text="26.99€"/>
+            <TextView
+                android:id="@+id/flower_detail_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.flower.name}"
+                android:textSize="26sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/flower_detail_image"
+                app:layout_constraintStart_toStartOf="@+id/flower_detail_image"
+                app:layout_constraintTop_toBottomOf="@+id/flower_detail_image"
+                tools:text="Flower" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/flower_detail_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@{viewModel.flower.description}"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flower_detail_label"
+                tools:text="FlowerDescription Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla" />
+
+            <TextView
+                android:id="@+id/flower_detail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.flower.price.toString() + '€'}"
+                android:textSize="26sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="26dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flower_detail_description"
+                tools:text="26.99€"/>
+
+            <Button
+                android:id="@+id/flower_detail_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="delete"
+                android:onClick="@{clickListener}"
+                app:layout_constraintEnd_toEndOf="@+id/flower_detail_image"
+                app:layout_constraintStart_toStartOf="@+id/flower_detail_image"
+                app:layout_constraintTop_toBottomOf="@+id/flower_detail_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

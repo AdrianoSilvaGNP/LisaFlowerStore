@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.adrianosilva.lisaflowerstore.database.FlowerDatabase
 
@@ -31,6 +32,10 @@ class FlowerDetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
+        binding.clickListener = View.OnClickListener {
+            viewModel.deleteFlower()
+            it.findNavController().navigate(FlowerDetailFragmentDirections.actionFlowerDetailFragmentToFlowerListFragment())
+        }
 
         return binding.root
     }
