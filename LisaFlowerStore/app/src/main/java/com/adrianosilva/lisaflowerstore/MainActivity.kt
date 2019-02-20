@@ -14,7 +14,6 @@ import com.adrianosilva.lisaflowerstore.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout : DrawerLayout
-    //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +23,17 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
 
         navController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
-        //appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         binding.navView.setupWithNavController(navController)
+
+        // prevent nav gesture if not on start destination
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
+            if (destination.id == controller.graph.startDestination) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
