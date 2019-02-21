@@ -22,12 +22,12 @@ class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
         val flower = getItem(position)
         holder.apply {
-            bind(createOnClickListener(flower.id!!), flower)
+            bind(createOnClickListener(flower.id), flower)
             //itemView.tag = flower
         }
     }
 
-    private fun createOnClickListener(flowerId: Int): View.OnClickListener {
+    private fun createOnClickListener(flowerId: String): View.OnClickListener {
         return View.OnClickListener {
             val direction = FlowerListFragmentDirections.actionFlowerListFragmentToFlowerDetailFragment(flowerId)
             it.findNavController().navigate(direction)

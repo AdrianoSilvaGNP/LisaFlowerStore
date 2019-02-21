@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 
-class FlowerDetailViewModel internal constructor(flowerRepository: FlowerRepository, private val flowerId: Int): ViewModel() {
+class FlowerDetailViewModel internal constructor(flowerRepository: FlowerRepository, private val flowerId: String): ViewModel() {
 
     private val repository: FlowerRepository = flowerRepository
     var flower: LiveData<FlowerObject>

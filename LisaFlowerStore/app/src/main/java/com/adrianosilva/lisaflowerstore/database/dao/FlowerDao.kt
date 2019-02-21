@@ -7,14 +7,17 @@ import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 @Dao
 interface FlowerDao {
 
-    @Query("SELECT * FROM flowers ORDER BY id ASC")
+    @Query("SELECT * FROM flowers ORDER BY name ASC")
     fun getAllFlowers(): LiveData<List<FlowerObject>>
 
     @Query("SELECT * FROM flowers WHERE name = :name")
     fun getFlowerByName(name: String): LiveData<FlowerObject>
 
+    @Query("SELECT * FROM flowers WHERE name = :name")
+    fun getFlowerByNameSync(name: String): FlowerObject
+
     @Query("SELECT * FROM flowers WHERE id = :id")
-    fun getFlowerById(id: Int): LiveData<FlowerObject>
+    fun getFlowerById(id: String): LiveData<FlowerObject>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(flowers: List<FlowerObject>)
@@ -26,5 +29,5 @@ interface FlowerDao {
     fun updateFlower(flower: FlowerObject)
 
     @Query("DELETE FROM flowers WHERE id = :id")
-    fun deleteFlowerById(id: Int)
+    fun deleteFlowerById(id: String)
 }

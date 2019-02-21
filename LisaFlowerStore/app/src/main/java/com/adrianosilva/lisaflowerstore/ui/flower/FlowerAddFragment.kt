@@ -15,6 +15,7 @@ import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerAddBinding
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerAddViewModel
 import com.adrianosilva.lisaflowerstore.viewmodel.factory.ViewModelFactory
+import java.util.*
 
 
 class FlowerAddFragment : Fragment() {
@@ -34,7 +35,8 @@ class FlowerAddFragment : Fragment() {
 
     private fun createOnClickListener(binding: FragmentFlowerAddBinding): View.OnClickListener {
         return View.OnClickListener {
-            viewModel.insertFlower(FlowerObject(null,
+            viewModel.insertFlower(FlowerObject(
+                UUID.randomUUID().toString(),
                 binding.flowerAddFragmentNameEt.text.toString(),
                 binding.flowerAddFragmentDescriptionEt.text.toString(),
                 binding.flowerAddFragmentPriceEt.text.toString().toDouble()))

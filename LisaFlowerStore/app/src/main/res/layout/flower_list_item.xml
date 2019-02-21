@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:onClick="@{clickListener}" >
 
-
         <ImageView
             android:id="@+id/flower_list_item_image"
             android:layout_width="125dp"
@@ -32,20 +31,19 @@
 
         <TextView
             android:id="@+id/flower_list_item_label"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:maxLines="4"
             android:singleLine="false"
             android:text="@{flowerObject.name}"
-            tools:text="Flowers"
             android:textSize="16sp"
-            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/flower_list_item_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/flower_list_item_image"
-            app:layout_constraintTop_toTopOf="@+id/flower_list_item_image" />
+            app:layout_constraintTop_toTopOf="@+id/flower_list_item_image"
+            tools:text="Flowers" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/flower_list_item_guideline"
@@ -79,7 +77,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

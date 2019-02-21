@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerDetailViewModel
 
-class FlowerDetailViewModelFactory (private val repository: FlowerRepository, private val flowerId: Int) : ViewModelProvider.NewInstanceFactory() {
+class FlowerDetailViewModelFactory (private val repository: FlowerRepository, private val flowerId: String) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
