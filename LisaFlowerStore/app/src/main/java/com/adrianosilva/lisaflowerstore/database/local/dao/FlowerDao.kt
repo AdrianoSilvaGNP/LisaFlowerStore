@@ -1,4 +1,4 @@
-package com.adrianosilva.lisaflowerstore.database.dao
+package com.adrianosilva.lisaflowerstore.database.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -12,9 +12,6 @@ interface FlowerDao {
 
     @Query("SELECT * FROM flowers WHERE name = :name")
     fun getFlowerByName(name: String): LiveData<FlowerObject>
-
-    @Query("SELECT * FROM flowers WHERE name = :name")
-    fun getFlowerByNameSync(name: String): FlowerObject
 
     @Query("SELECT * FROM flowers WHERE id = :id")
     fun getFlowerById(id: String): LiveData<FlowerObject>

@@ -29,9 +29,6 @@ class FlowerListFragment : Fragment() {
         binding.flowerListFragmentRv.adapter = adapter
         subscribeUi(adapter)
 
-        //viewModel.insertFlower(FlowerObject(null, "Florzinha", "TESTESTESTEST", 24.99))
-        //viewModel.insertFlower(FlowerObject(null, "Florzona", "TESTESTESTEST", 32.99))
-
         binding.flowerListAddFab.setOnClickListener {
             view!!.findNavController().navigate(FlowerListFragmentDirections.actionFlowerListFragmentToFlowerAddFragment())
         }
@@ -41,7 +38,8 @@ class FlowerListFragment : Fragment() {
 
     private fun subscribeUi(adapter: FlowerAdapter) {
         viewModel.getAllFlowers().observe(viewLifecycleOwner, Observer { flowers ->
-            if (flowers != null) adapter.submitList(flowers)
+            if (flowers != null)
+                adapter.submitList(flowers)
         })
     }
 

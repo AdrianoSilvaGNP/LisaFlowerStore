@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.adrianosilva.lisaflowerstore.database.FlowerDatabase
+import com.adrianosilva.lisaflowerstore.database.local.FlowerDatabase
 import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerAddViewModel
-import com.adrianosilva.lisaflowerstore.viewmodel.FlowerDetailViewModel
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
 import java.lang.IllegalArgumentException
 
@@ -32,10 +31,8 @@ class ViewModelFactory(private val repository: FlowerRepository) : ViewModelProv
         @Volatile private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance(application: Application) =
-            INSTANCE
-                ?: synchronized(ViewModelFactory::class.java) {
-                INSTANCE
-                    ?: ViewModelFactory(
+            INSTANCE ?: synchronized(ViewModelFactory::class.java) {
+                INSTANCE ?: ViewModelFactory(
                         FlowerRepository.getInstance(
                             FlowerDatabase.getInstance(application.applicationContext).flowersDao()
                         )

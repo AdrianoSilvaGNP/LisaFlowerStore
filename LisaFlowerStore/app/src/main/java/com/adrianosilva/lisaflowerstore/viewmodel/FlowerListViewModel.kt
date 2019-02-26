@@ -9,12 +9,8 @@ import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 
 class FlowerListViewModel internal constructor(flowerRepository: FlowerRepository) : ViewModel() {
 
-    private var mAllFlowers: LiveData<List<FlowerObject>> = MutableLiveData<List<FlowerObject>>()
     private val repository: FlowerRepository = flowerRepository
-
-    init {
-        mAllFlowers = repository.getFlowers()
-    }
+    private var mAllFlowers: LiveData<List<FlowerObject>> = repository.getFlowers()
 
     fun getAllFlowers() = mAllFlowers
 

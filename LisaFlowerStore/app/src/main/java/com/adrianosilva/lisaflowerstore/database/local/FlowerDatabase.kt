@@ -1,10 +1,10 @@
-package com.adrianosilva.lisaflowerstore.database
+package com.adrianosilva.lisaflowerstore.database.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.adrianosilva.lisaflowerstore.database.dao.FlowerDao
+import com.adrianosilva.lisaflowerstore.database.local.dao.FlowerDao
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 
 /**

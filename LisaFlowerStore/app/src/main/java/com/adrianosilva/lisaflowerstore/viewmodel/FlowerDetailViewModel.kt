@@ -8,11 +8,7 @@ import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 class FlowerDetailViewModel internal constructor(flowerRepository: FlowerRepository, private val flowerId: String): ViewModel() {
 
     private val repository: FlowerRepository = flowerRepository
-    var flower: LiveData<FlowerObject>
-
-    init {
-        flower = repository.getFlowerById(flowerId)
-    }
+    var flower: LiveData<FlowerObject> = repository.getFlowerById(flowerId)
 
     fun deleteFlower() = repository.deleteFlowerById(flowerId)
 

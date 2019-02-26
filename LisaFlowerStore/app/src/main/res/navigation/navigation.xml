@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/flowerListFragment"
         android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerListFragment"
-        android:label="FlowerListFragment"
+        android:label="Lisa Flower Store"
         tools:layout="@layout/fragment_flower_list">
         <action
             android:id="@+id/action_flowerListFragment_to_flowerAddFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/flowerAddFragment"
         android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerAddFragment"
-        android:label="FlowerAddFragment"
+        android:label="Add Flower"
         tools:layout="@layout/fragment_flower_add">
         <action
             android:id="@+id/action_flowerAddFragment_to_flowerListFragment"
@@ -31,8 +31,8 @@
     <fragment
         android:id="@+id/flowerDetailFragment"
         android:name="com.adrianosilva.lisaflowerstore.ui.flower.FlowerDetailFragment"
-        android:label="fragment_flower_detail"
-        tools:layout="@layout/fragment_flower_detail" >
+        android:label="Flower Details"
+        tools:layout="@layout/fragment_flower_detail">
         <action
             android:id="@+id/action_flowerDetailFragment_to_flowerListFragment"
             app:destination="@id/flowerListFragment"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/scheduleFragment"
         android:name="com.adrianosilva.lisaflowerstore.ui.other.ScheduleFragment"
-        android:label="fragment_schedule"
+        android:label="Schedule"
         tools:layout="@layout/fragment_schedule" />
 
 </navigation>
