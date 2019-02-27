@@ -17,7 +17,7 @@ interface FlowerDao {
     fun getFlowerById(id: String): LiveData<FlowerObject>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(flowers: List<FlowerObject>)
+    fun insertBulkFlowers(flowers: List<FlowerObject>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFlower(flower: FlowerObject)

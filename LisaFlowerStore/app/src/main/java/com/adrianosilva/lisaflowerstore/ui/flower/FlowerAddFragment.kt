@@ -15,6 +15,7 @@ import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerAddBinding
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.adrianosilva.lisaflowerstore.viewmodel.FlowerAddViewModel
 import com.adrianosilva.lisaflowerstore.viewmodel.factory.ViewModelFactory
+import org.joda.time.DateTime
 import java.util.*
 
 
@@ -39,7 +40,9 @@ class FlowerAddFragment : Fragment() {
                 UUID.randomUUID().toString(),
                 binding.flowerAddFragmentNameEt.text.toString(),
                 binding.flowerAddFragmentDescriptionEt.text.toString(),
-                binding.flowerAddFragmentPriceEt.text.toString().toDouble()))
+                binding.flowerAddFragmentPriceEt.text.toString().toDouble(),
+                DateTime.now(),
+                DateTime.now()))
 
             // close keyboard
             val inputManager: InputMethodManager = this.context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

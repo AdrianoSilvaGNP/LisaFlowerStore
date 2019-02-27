@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.adrianosilva.lisaflowerstore">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/lfs_logo"
         android:label="@string/app_name"
+        android:name=".LFSApplication"
         android:roundIcon="@mipmap/lfs_logo"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">

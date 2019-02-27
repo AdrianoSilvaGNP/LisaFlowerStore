@@ -5,9 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'androidx.navigation.safeargs'
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
@@ -31,22 +30,27 @@ android {
     }
 }
 
+configurations.all {
+    // OkHttp 3.5.0+ includes the websockets API, so we need this to prevent a conflict
+    exclude module: 'okhttp-ws'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.core:core-ktx:1.1.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    implementation 'com.google.firebase:firebase-core:16.0.7'
-    implementation 'com.google.firebase:firebase-database:16.0.6'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
+
+    // lifecycle + viewModel
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
 
     // room database
     implementation "androidx.room:room-runtime:2.1.0-alpha04"
@@ -58,13 +62,22 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
 
     // menu_navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-beta02"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-beta02"
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-rc01"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-rc01"
 
     // material design
     implementation "com.google.android.material:material:1.1.0-alpha03"
 
-    // workmanager
+    // workManager
     implementation "android.arch.work:work-runtime-ktx:1.0.0-rc02"
+
+    // back4app parse SDK
+    implementation "com.github.parse-community.Parse-SDK-Android:parse:1.19.0"
+
+    // back4app LiveQuery
+    implementation 'com.github.tgio:parse-livequery:1.0.3'
+
+    // joda-time
+    implementation 'com.github.JodaOrg:joda-time:v2.10.1'
 
 }
