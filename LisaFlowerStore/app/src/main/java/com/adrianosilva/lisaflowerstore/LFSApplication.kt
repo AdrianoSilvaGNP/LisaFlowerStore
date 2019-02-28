@@ -2,7 +2,9 @@ package com.adrianosilva.lisaflowerstore
 
 import android.app.Application
 import com.parse.Parse
-import tgio.parselivequery.LiveQueryClient
+import com.parse.livequery.ParseLiveQueryClient
+
+
 
 /**
  * Application wide class
@@ -17,7 +19,6 @@ class LFSApplication: Application() {
             .server("https://parseapi.back4app.com")
             .build())
 
-        LiveQueryClient.init("wss://" + "lisaflowerstore.back4app.io", "8Kqv9M0FBsMiDUDe1iXRKA67Z7WxmdymGtm9wxxI", true)
-        LiveQueryClient.connect()
+
     }
 }

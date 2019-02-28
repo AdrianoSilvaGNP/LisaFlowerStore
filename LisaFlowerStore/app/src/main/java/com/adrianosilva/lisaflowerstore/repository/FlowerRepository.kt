@@ -9,32 +9,25 @@ import com.adrianosilva.lisaflowerstore.database.local.dao.FlowerDao
 import com.adrianosilva.lisaflowerstore.database.remote.GetAllFlowersFromCloudWorker
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.parse.ParseObject
-import org.joda.time.DateTime
-import tgio.parselivequery.BaseQuery
-import tgio.parselivequery.LiveQueryEvent
-import tgio.parselivequery.interfaces.OnListener
+import com.parse.ParseQuery
+import com.parse.livequery.ParseLiveQueryClient
+
 import kotlin.concurrent.thread
 
 class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
     private val workManager: WorkManager = WorkManager.getInstance()
+    val parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient()
 
-    private val sub = BaseQuery.Builder("FlowerObject")
+    val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery("FlowerObject")
+
+    /*private val sub = BaseQuery.Builder("FlowerObject")
         .build().subscribe()
+
 
     init {
         sub.on(LiveQueryEvent.CREATE) {
-            /*val loadFlowersConstraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
 
-
-            val loadFlowersRequest = OneTimeWorkRequestBuilder<GetAllFlowersFromCloudWorker>()
-                .setConstraints(loadFlowersConstraints)
-                .addTag(FLOWERS_GET_TAG)
-                .build()
-
-            workManager.enqueueUniqueWork(FLOWERS_GET_WORK_NAME, ExistingWorkPolicy.KEEP, loadFlowersRequest)*/
             val flower = FlowerObject(it.getString("id"),
                 it.getString("name"),
                 it.getString("description"),
@@ -44,9 +37,21 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
             flowerDao.insertFlower(flower)
         }
-    }
+    }*/
 
     fun getAllFlowers(): LiveData<List<FlowerObject>> {
+
+        val loadFlowersConstraints = Constraints.Builder()
+               .setRequiredNetworkType(NetworkType.CONNECTED)
+               .build()
+
+
+           val loadFlowersRequest = OneTimeWorkRequestBuilder<GetAllFlowersFromCloudWorker>()
+               .setConstraints(loadFlowersConstraints)
+               .addTag(FLOWERS_GET_TAG)
+               .build()
+
+           workManager.enqueueUniqueWork(FLOWERS_GET_WORK_NAME, ExistingWorkPolicy.KEEP, loadFlowersRequest)
 
         return flowerDao.getAllFlowers()
     }

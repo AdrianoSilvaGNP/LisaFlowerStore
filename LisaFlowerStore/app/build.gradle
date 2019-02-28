@@ -30,11 +30,6 @@ android {
     }
 }
 
-configurations.all {
-    // OkHttp 3.5.0+ includes the websockets API, so we need this to prevent a conflict
-    exclude module: 'okhttp-ws'
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -56,11 +51,6 @@ dependencies {
     implementation "androidx.room:room-runtime:2.1.0-alpha04"
     kapt "androidx.room:room-compiler:2.1.0-alpha04"
 
-    // dagger2 dependency injection
-    implementation 'com.google.dagger:dagger-android:2.16'
-    implementation 'com.google.dagger:dagger-android-support:2.16'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
-
     // menu_navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-rc01"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-rc01"
@@ -75,7 +65,7 @@ dependencies {
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.19.0"
 
     // back4app LiveQuery
-    implementation 'com.github.tgio:parse-livequery:1.0.3'
+    implementation 'com.github.parse-community:ParseLiveQuery-Android:1.1.0'
 
     // joda-time
     implementation 'com.github.JodaOrg:joda-time:v2.10.1'
