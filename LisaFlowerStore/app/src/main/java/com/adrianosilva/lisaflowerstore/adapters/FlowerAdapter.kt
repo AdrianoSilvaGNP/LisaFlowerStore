@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adrianosilva.lisaflowerstore.databinding.FlowerListItemBinding
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
 import com.adrianosilva.lisaflowerstore.ui.flower.FlowerListFragmentDirections
-import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
 
 class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(FlowerDiffCallback()) {
 
@@ -22,7 +21,7 @@ class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
         val flower = getItem(position)
         holder.apply {
-            bind(createOnClickListener(flower.id), flower)
+            bind(createOnClickListener(flower.localId), flower)
             //itemView.tag = flower
         }
     }
@@ -50,7 +49,7 @@ class FlowerAdapter : ListAdapter<FlowerObject, FlowerAdapter.FlowerViewHolder>(
 private class FlowerDiffCallback : DiffUtil.ItemCallback<FlowerObject>() {
 
     override fun areItemsTheSame(oldItem: FlowerObject, newItem: FlowerObject): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.localId == newItem.localId
     }
 
     override fun areContentsTheSame(oldItem: FlowerObject, newItem: FlowerObject): Boolean {

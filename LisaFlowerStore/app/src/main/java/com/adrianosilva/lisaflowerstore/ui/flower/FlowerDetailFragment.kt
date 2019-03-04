@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,8 +33,13 @@ class FlowerDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.clickListener = View.OnClickListener {
-            viewModel.deleteFlower()
-            it.findNavController().navigate(FlowerDetailFragmentDirections.actionFlowerDetailFragmentToFlowerListFragment())
+            val successOperation =  viewModel.deleteFlower()
+            if (successOperation) {
+                it.findNavController().navigate(FlowerDetailFragmentDirections.actionFlowerDetailFragmentToFlowerListFragment())
+            } else {
+                Toast.makeText(this.context, "No Internet. Cannot delete.", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         return binding.root

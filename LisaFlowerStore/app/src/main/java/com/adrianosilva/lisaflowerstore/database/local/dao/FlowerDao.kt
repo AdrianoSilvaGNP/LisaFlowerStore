@@ -13,7 +13,7 @@ interface FlowerDao {
     @Query("SELECT * FROM flowers WHERE name = :name")
     fun getFlowerByName(name: String): LiveData<FlowerObject>
 
-    @Query("SELECT * FROM flowers WHERE id = :id")
+    @Query("SELECT * FROM flowers WHERE localId = :id")
     fun getFlowerById(id: String): LiveData<FlowerObject>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -25,6 +25,6 @@ interface FlowerDao {
     @Update
     fun updateFlower(flower: FlowerObject)
 
-    @Query("DELETE FROM flowers WHERE id = :id")
+    @Query("DELETE FROM flowers WHERE localId = :id")
     fun deleteFlowerById(id: String)
 }

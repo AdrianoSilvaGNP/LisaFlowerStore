@@ -10,6 +10,8 @@ class FlowerDetailViewModel internal constructor(flowerRepository: FlowerReposit
     private val repository: FlowerRepository = flowerRepository
     var flower: LiveData<FlowerObject> = repository.getFlowerById(flowerId)
 
-    fun deleteFlower() = repository.deleteFlowerById(flowerId)
+    fun deleteFlower(): Boolean {
+        return repository.deleteFlowerById(flowerId)
+    }
 
 }

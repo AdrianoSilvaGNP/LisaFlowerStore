@@ -1,6 +1,8 @@
 package com.adrianosilva.lisaflowerstore.repository
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.adrianosilva.lisaflowerstore.FLOWERS_GET_TAG
@@ -8,38 +10,58 @@ import com.adrianosilva.lisaflowerstore.FLOWERS_GET_WORK_NAME
 import com.adrianosilva.lisaflowerstore.database.local.dao.FlowerDao
 import com.adrianosilva.lisaflowerstore.database.remote.GetAllFlowersFromCloudWorker
 import com.adrianosilva.lisaflowerstore.objects.FlowerObject
+import com.adrianosilva.lisaflowerstore.ui.flower.FlowerDetailFragment
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.livequery.ParseLiveQueryClient
+import com.parse.livequery.SubscriptionHandling
+import org.joda.time.DateTime
+import java.net.URI
+import java.time.Duration
 
 import kotlin.concurrent.thread
 
 class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
+    private val TAG by lazy { FlowerRepository::class.java.simpleName }
+
     private val workManager: WorkManager = WorkManager.getInstance()
-    val parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient()
+    private val parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient(URI("wss://lisaflowerstore.back4app.io"))
 
-    val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery("FlowerObject")
 
-    /*private val sub = BaseQuery.Builder("FlowerObject")
-        .build().subscribe()
 
 
     init {
-        sub.on(LiveQueryEvent.CREATE) {
+        val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery("FlowerObject")
+        val subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery)
 
-            val flower = FlowerObject(it.getString("id"),
-                it.getString("name"),
-                it.getString("description"),
-                it.getDouble("price"),
-                DateTime(it.getLong("updatedAt")),
-                DateTime(it.getLong("createdAt")))
+        subscriptionHandling.handleEvents { query, event, `object` ->
 
-            flowerDao.insertFlower(flower)
+            when (event) {
+                SubscriptionHandling.Event.CREATE -> {
+                    Log.w(TAG, query.className + `object`.objectId)
+                    val flowerFromCloud = FlowerObject(
+                        `object`.getString("localId")!!,
+                        `object`.getString("name")!!,
+                        `object`.getString("description")!!,
+                        `object`.getDouble("price"),
+                        DateTime(`object`.getDate("updatedAt")),
+                        DateTime(`object`.getDate("createdAt"))
+                    )
+                    thread { flowerDao.insertFlower(flowerFromCloud) }
+
+                }
+                SubscriptionHandling.Event.DELETE -> thread { flowerDao.deleteFlowerById(`object`.getString("localId")!!) }
+                SubscriptionHandling.Event.UPDATE -> {
+
+                }
+                else -> {}
+            }
         }
-    }*/
+    }
 
     fun getAllFlowers(): LiveData<List<FlowerObject>> {
+
 
         val loadFlowersConstraints = Constraints.Builder()
                .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -63,7 +85,7 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
     fun insertFlower(flower: FlowerObject) {
 
         val flowerToCloud = ParseObject("FlowerObject")
-        flowerToCloud.put("id", flower.id)
+        flowerToCloud.put("localId", flower.localId)
         flowerToCloud.put("updatedAt", flower.updatedAt.toDate())
         flowerToCloud.put("createdAt", flower.createdAt.toDate())
         flowerToCloud.put("name", flower.name)
@@ -84,9 +106,25 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
         }
     }
 
-    fun deleteFlowerById(flowerId: String) = thread {
-        flowerDao.deleteFlowerById(flowerId)
+    fun deleteFlowerById(flowerId: String): Boolean {
 
+        var successOperation : Boolean
+        val query = ParseQuery.getQuery<ParseObject>("FlowerObject")
+        query.whereEqualTo("localId", flowerId).getFirstInBackground { entity, e ->
+            if (e == null) {
+                successOperation = true
+                entity.deleteInBackground {e ->
+                    if (e == null) {
+                        // successful delete on server
+                        // delete in DB
+                        thread { flowerDao.deleteFlowerById(flowerId) }
+                    }
+                }
+            } else {
+                successOperation = false
+            }
+        }
+        return successOperation
     }
 
     companion object {

@@ -26,7 +26,7 @@ class GetAllFlowersFromCloudWorker(context: Context, params: WorkerParameters): 
                 if (e == null) {
                     for (i: Int in 0 until objects.size) {
                         val currentFlower = FlowerObject(
-                            objects[i].getString("id")!!,
+                            objects[i].getString("localId")!!,
                             objects[i].getString("name")!!,
                             objects[i].getString("description")!!,
                             objects[i].getDouble("price"),
