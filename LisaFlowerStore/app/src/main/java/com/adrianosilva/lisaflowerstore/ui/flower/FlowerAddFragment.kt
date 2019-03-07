@@ -42,7 +42,7 @@ class FlowerAddFragment : Fragment() {
                 binding.flowerAddFragmentDescriptionEt.text.toString(),
                 binding.flowerAddFragmentPriceEt.text.toString().toDouble(),
                 DateTime.now(),
-                DateTime.now()))
+                DateTime.now()), this.context!!)
 
             // close keyboard
             val inputManager: InputMethodManager = this.context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

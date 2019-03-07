@@ -12,10 +12,16 @@ import com.adrianosilva.lisaflowerstore.repository.FlowerRepository
 class FlowerListViewModel internal constructor(flowerRepository: FlowerRepository) : ViewModel() {
 
     private val repository: FlowerRepository = flowerRepository
-    private var mAllFlowers: LiveData<List<FlowerObject>> = repository.getAllFlowers()
     private val workManager: WorkManager = WorkManager.getInstance()
     internal val outputWorkInfos: LiveData<List<WorkInfo>> = workManager.getWorkInfosByTagLiveData(FLOWERS_GET_TAG)
 
-    fun getAllFlowers() = mAllFlowers
+    fun getAllFlowers(): LiveData<List<FlowerObject>>
+    {
+        return repository.getAllFlowers()
+    }
+
+    fun refreshAllFlowers() {
+        repository.getAllFlowersFromCloud()
+    }
 
 }

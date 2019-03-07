@@ -52,11 +52,11 @@ dependencies {
     kapt "androidx.room:room-compiler:2.1.0-alpha04"
 
     // menu_navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-rc01"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-rc01"
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-rc02"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-rc02"
 
     // material design
-    implementation "com.google.android.material:material:1.1.0-alpha03"
+    implementation "com.google.android.material:material:1.1.0-alpha04"
 
     // workManager
     implementation "android.arch.work:work-runtime-ktx:1.0.0-rc02"
@@ -69,5 +69,8 @@ dependencies {
 
     // joda-time
     implementation 'com.github.JodaOrg:joda-time:v2.10.1'
+
+    // anko (ktx background threads)
+    implementation "org.jetbrains.anko:anko:0.10.8"
 
 }

@@ -15,7 +15,10 @@ import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.livequery.ParseLiveQueryClient
 import com.parse.livequery.SubscriptionHandling
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.joda.time.DateTime
+import java.io.IOException
 import java.net.URI
 import java.time.Duration
 
@@ -27,8 +30,6 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
     private val workManager: WorkManager = WorkManager.getInstance()
     private val parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient(URI("wss://lisaflowerstore.back4app.io"))
-
-
 
 
     init {
@@ -62,20 +63,22 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
 
     fun getAllFlowers(): LiveData<List<FlowerObject>> {
 
-
-        val loadFlowersConstraints = Constraints.Builder()
-               .setRequiredNetworkType(NetworkType.CONNECTED)
-               .build()
-
-
-           val loadFlowersRequest = OneTimeWorkRequestBuilder<GetAllFlowersFromCloudWorker>()
-               .setConstraints(loadFlowersConstraints)
-               .addTag(FLOWERS_GET_TAG)
-               .build()
-
-           workManager.enqueueUniqueWork(FLOWERS_GET_WORK_NAME, ExistingWorkPolicy.KEEP, loadFlowersRequest)
+        getAllFlowersFromCloud()
 
         return flowerDao.getAllFlowers()
+    }
+
+    fun getAllFlowersFromCloud() {
+        val loadFlowersConstraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val loadFlowersRequest = OneTimeWorkRequestBuilder<GetAllFlowersFromCloudWorker>()
+            .setConstraints(loadFlowersConstraints)
+            .addTag(FLOWERS_GET_TAG)
+            .build()
+
+        workManager.enqueueUniqueWork(FLOWERS_GET_WORK_NAME, ExistingWorkPolicy.KEEP, loadFlowersRequest)
     }
 
     fun getFlowerById(flowerId: String) = flowerDao.getFlowerById(flowerId)
@@ -106,25 +109,22 @@ class FlowerRepository private constructor(private val flowerDao: FlowerDao){
         }
     }
 
-    fun deleteFlowerById(flowerId: String): Boolean {
+    fun deleteFlowerById(flowerId: String) {
 
-        var successOperation : Boolean
         val query = ParseQuery.getQuery<ParseObject>("FlowerObject")
         query.whereEqualTo("localId", flowerId).getFirstInBackground { entity, e ->
             if (e == null) {
-                successOperation = true
                 entity.deleteInBackground {e ->
                     if (e == null) {
                         // successful delete on server
                         // delete in DB
                         thread { flowerDao.deleteFlowerById(flowerId) }
+                    } else {
+
                     }
                 }
-            } else {
-                successOperation = false
             }
         }
-        return successOperation
     }
 
     companion object {

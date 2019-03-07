@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import com.adrianosilva.lisaflowerstore.FLOWERS_GET_TAG
 import com.adrianosilva.lisaflowerstore.adapters.FlowerAdapter
 
 import com.adrianosilva.lisaflowerstore.databinding.FragmentFlowerListBinding
@@ -20,9 +18,10 @@ import com.adrianosilva.lisaflowerstore.viewmodel.FlowerListViewModel
 import com.adrianosilva.lisaflowerstore.viewmodel.factory.ViewModelFactory
 
 
-class FlowerListFragment : Fragment() {
+class FlowerListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var viewModel: FlowerListViewModel
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -32,6 +31,8 @@ class FlowerListFragment : Fragment() {
 
         val adapter = FlowerAdapter()
         binding.flowerListFragmentRv.adapter = adapter
+        swipeRefreshLayout = binding.flowerListSrl
+        binding.flowerListSrl.setOnRefreshListener(this)
         subscribeUi(adapter, binding)
 
         binding.flowerListAddFab.setOnClickListener {
@@ -39,6 +40,13 @@ class FlowerListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onRefresh() {
+        Handler().postDelayed({
+            viewModel.refreshAllFlowers()
+            swipeRefreshLayout.isRefreshing = false
+        },2000)
     }
 
     private fun subscribeUi(adapter: FlowerAdapter, binding: FragmentFlowerListBinding) {

@@ -33,13 +33,8 @@ class FlowerDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.clickListener = View.OnClickListener {
-            val successOperation =  viewModel.deleteFlower()
-            if (successOperation) {
-                it.findNavController().navigate(FlowerDetailFragmentDirections.actionFlowerDetailFragmentToFlowerListFragment())
-            } else {
-                Toast.makeText(this.context, "No Internet. Cannot delete.", Toast.LENGTH_SHORT).show()
-            }
-
+            viewModel.deleteFlower(this.context!!)
+            it.findNavController().navigate(FlowerDetailFragmentDirections.actionFlowerDetailFragmentToFlowerListFragment())
         }
 
         return binding.root
